@@ -1,25 +1,73 @@
-import datetime
+import tkinter as tk
+from tkinter import ttk
+from tkcalendar import DateEntry
 
-def get_starting_page(start_date, input_date, daily_pages):
-    starting_page = 1
-    days_diff = (input_date - start_date).days
+def calculate_pages():
+    # Get the user input from the GUI
+    start_date = start_cal.get_date()
+    end_date = end_cal.get_date()
+    schedule = int(schedule_entry.get())
 
-    if days_diff < 0:
-        return None  # Return None if the input date is before the start date
+    # Calculate the number of days between start and end dates
+    num_days = (end_date - start_date).days + 1
 
-    starting_page += (days_diff * daily_pages)
-    return starting_page
+    # Loop through each day and calculate expected page number
+    for i in range(num_days):
+        # Calculate page number for front and back pages
+        front_page = i * 2 + 1
+        back_page = i * 2 + 2
 
-while True:
-    start_date_str = input("Enter the start date (dd mm yyyy), or enter 'q' to quit: ")
-    if start_date_str == 'q':
-        break
-    input_date_str = input("Enter the input date (dd mm yyyy): ")
-    daily_pages = int(input("Enter the number of pages you can write each day: "))
-    start_date = datetime.datetime.strptime(start_date_str, "%d %m %Y").date()
-    input_date = datetime.datetime.strptime(input_date_str, "%d %m %Y").date()
-    starting_page = get_starting_page(start_date, input_date, daily_pages)
-    if starting_page is None:
-        print("Error: Input date is before the start date.")
-    else:
-        print(f"You will start on page {starting_page} on {input_date}.")
+        # Calculate page number for third page (back)
+        if i % 3 == 2:
+            third_page = back_page
+        else:
+            third_page = back_page - 1
+
+        # Calculate the date for the current day
+        current_date = start_date + datetime.timedelta(days=i)
+
+        # Calculate the expected page number for the current day
+        if current_date.weekday() < 5:
+            expected_page = front_page
+        else:
+            expected_page = third_page
+
+        # Display the expected page number for the current day in the GUI
+        output_text.insert(tk.END, f"Date: {current_date.strftime('%d/%m/%Y')}, Expected Page: {expected_page}\n")
+
+# Create the GUI
+root = tk.Tk()
+root.title("Writing Scheduler")
+
+# Create a frame for the date selection widgets
+date_frame = ttk.Frame(root, padding=10)
+date_frame.pack()
+
+# Create a DateEntry widget for the start date
+start_label = ttk.Label(date_frame, text="Start Date:")
+start_label.grid(row=0, column=0, padx=5, pady=5, sticky="w")
+start_cal = DateEntry(date_frame, width=12, background="darkblue", foreground="white", date_pattern="dd/MM/yyyy")
+start_cal.grid(row=0, column=1, padx=5, pady=5, sticky="w")
+
+# Create a DateEntry widget for the end date
+end_label = ttk.Label(date_frame, text="End Date:")
+end_label.grid(row=1, column=0, padx=5, pady=5, sticky="w")
+end_cal = DateEntry(date_frame, width=12, background="darkblue", foreground="white", date_pattern="dd/MM/yyyy")
+end_cal.grid(row=1, column=1, padx=5, pady=5, sticky="w")
+
+# Create a label and entry widget for the writing schedule
+schedule_label = ttk.Label(root, text="Writing Schedule (in pages per day):")
+schedule_label.pack(pady=5)
+schedule_entry = ttk.Entry(root)
+schedule_entry.pack()
+
+# Create a button to calculate the expected page numbers
+calculate_button = ttk.Button(root, text="Calculate Pages", command=calculate_pages)
+calculate_button.pack(pady=5)
+
+# Create a text widget to display the expected page numbers
+output_text = tk.Text(root, height=10, width=50)
+output_text.pack(pady=5)
+
+# Start the GUI main loop
+root.mainloop()
