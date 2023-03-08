@@ -3,14 +3,32 @@
 <head>
 </head>
 <body>
-	<h1>Simple Writing Scheduler</h1>
-	<p>The simple  Writing Scheduler is a Python program that helps users schedule their writing assignments based on a fixed writing schedule. Users can input the start date, end date, and their writing schedule (i.e. the number of pages they can write each day), and the program will calculate the expected page numbers for each day.
+	<h1>Writing Scheduler README</h1>
+	<p>This program allows the user to calculate the expected number of pages to write each day for a given date range and writing schedule. The program creates a graphical user interface (GUI) using the tkinter library and the tkcalendar module for selecting the start and end dates.</p>
 
-The Writing Scheduler is useful for writers who want to plan their writing assignments in advance and ensure that they stay on track with their writing goals. It can also be used by teams of writers who are working on a collaborative writing project, as the program can allocate tasks based on the expected page numbers for each day.</p>
-<h2>Motivation:</h2>
-<p>The motivation for creating the Writing Scheduler was to provide a simple and flexible tool that writers can use to plan their writing assignments. Many writers struggle with procrastination and lack of motivation, and having a clear plan for their writing assignments can help them stay on track and make progress towards their writing goals.</p>
-	<h2>How to Use</h2>
-	<p>To use the Writing Scheduler, simply run the program and follow the prompts to input the start date, end date, and writing schedule. The program will then calculate the expected page numbers for each day and display them on the screen.</p>
-	<p>Alternatively, you can also use the program in a loop to schedule multiple assignments at once</p>
+<h2>Requirements</h2>
+<ul>
+	<li>Python 3.x installed</li>
+	<li>Required modules: tkinter, ttk, tkcalendar</li>
+</ul>
+
+<h2>Usage</h2>
+<ol>
+	<li>Run the program by executing the Python script.</li>
+	<li>Select the start and end dates using the calendar widgets.</li>
+	<li>Enter the writing schedule in pages per day.</li>
+	<li>Click the "Calculate Pages" button to generate the expected page numbers.</li>
+	<li>The expected page numbers will be displayed in the output text box.</li>
+</ol>
+
+<h2>Code Overview</h2>
+<p>The program consists of a single function <code>calculate_pages</code> that is executed when the "Calculate Pages" button is clicked. The function retrieves the start and end dates and the writing schedule from the GUI widgets, calculates the number of days between the start and end dates, and loops through each day to calculate the expected page number.</p>
+
+<p>The expected page number for each day is based on whether the day is a weekday or a weekend, and whether it is the first or second page of a two-page spread or the third page of a three-page spread.</p>
+
+<p>The program uses the tkinter and ttk modules to create the GUI, and the tkcalendar module to create the calendar widgets.</p>
+
+<h2>Author</h2>
+<p>This program was created by Lakhan Raut.</p>
 </body>
 </html>
