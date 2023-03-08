@@ -3,7 +3,7 @@
 <head>
 </head>
 <body>
-	<h1>Sinple Writing Scheduler</h1>
+	<h1>Simple Writing Scheduler</h1>
 	<p>The simple  Writing Scheduler is a Python program that helps users schedule their writing assignments based on a fixed writing schedule. Users can input the start date, end date, and their writing schedule (i.e. the number of pages they can write each day), and the program will calculate the expected page numbers for each day.
 
 The Writing Scheduler is useful for writers who want to plan their writing assignments in advance and ensure that they stay on track with their writing goals. It can also be used by teams of writers who are working on a collaborative writing project, as the program can allocate tasks based on the expected page numbers for each day.</p>
